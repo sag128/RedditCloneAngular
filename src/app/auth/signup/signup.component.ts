@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {SignupRequest} from '../signup/signup-request.payload';
 import {AuthService} from '../shared/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-signup',
@@ -13,10 +16,11 @@ export class SignupComponent implements OnInit {
 
   signupForm:FormGroup;
   signupRequest:SignupRequest;
+  isError:Number;
 
-
-  constructor(private authService:AuthService) {
-
+  constructor(private authService:AuthService , private toastr: ToastrService,
+    private router: Router) {
+    
     this.signupRequest =
     {
       username :'',
@@ -36,6 +40,8 @@ export class SignupComponent implements OnInit {
     });
 
 
+   
+
 
   }
 
@@ -49,9 +55,45 @@ export class SignupComponent implements OnInit {
     this.authService.signupService(this.signupRequest)
         .subscribe(data =>
           {
-            console.log(data);
-          })
+            
+            if(data.toString().includes("Email"))
+            {
+              this.isError=1;
+              console.log(data+" 1");
+              this.toastr.error(data,"Error",{progressBar:true});
+            }
 
+            else if(data.toString().includes("Username"))
+            {
+              this.isError=2;
+              console.log(data+" 2");
+              this.toastr.error(data,"Error",{progressBar:true});
+
+            }
+
+            else if(data.toString().includes("Password"))
+            {
+              this.isError=3;
+              console.log(data+" 3");
+              this.toastr.error(data,"Error",{progressBar:true});
+
+            }
+            else{
+              console.log(data);
+              this.router.navigate(['/login'],{queryParams:{registered:true}})
+
+            }
+
+            
+
+          },
+          (error=>
+            {
+              this.isError=4;
+              console.log("Error");
+              this.toastr.error(error,"Error",{progressBar:true});
+            })
+      )
   }
 
 }

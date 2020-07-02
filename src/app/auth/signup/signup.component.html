@@ -15,7 +15,9 @@
                                 <input type="text" id="email_address" formControlName='email' class="form-control" name="email-address" required
                                     autofocus>
                                     <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched" class="help-block">Please enter a valid email</span>
-                            
+                                    
+                                        <span *ngIf='this.isError==1 && signupForm.get("email").touched' class=" red1">Email already exists</span>  
+                                   
                                 </div>
                         </div>
 
@@ -43,6 +45,10 @@
                             </button>
                             <span style="padding-left: 15px">Existing user? <a routerLink="/login">Log In</a></span>
                         </span>
+                       
+                        <div class="login-failed" *ngIf='this.isError==4'>
+                            <p class="login-failed-text">Please try again</p>   
+                       </div>  
                     </form>
                 </div>
             </div>

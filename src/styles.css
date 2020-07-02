@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-input.ng-invalid.ng-touched
+input.ng-invalid.ng-touched,span.ng-invalid.ng-touched
 {
     border: 1px solid red;
 }
@@ -25,3 +25,20 @@ input.ng-invalid.ng-touched
     padding: 3px 16px;
     opacity: 1;
   }
+
+
+  .login-failed,.signup-failed{
+    text-align: center;
+    margin: auto;
+    margin-top: 10px;
+    border: 2px solid black;
+    width: 65%;    
+    background-color: red;
+}
+
+.login-failed-text,.signup-failed-text{
+    text-align: center;
+    margin-top: 5px;
+    font-weight: bold;    
+    color: aliceblue;
+}

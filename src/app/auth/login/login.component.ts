@@ -62,8 +62,7 @@ export class LoginComponent implements OnInit {
 
           this.isError=false
           this.toastr.success("Login successful","Success",{progressBar:true});
-          this.router.navigateByUrl('');
-        
+          this.redirectTo('');        
 
       }
       ,
@@ -76,4 +75,13 @@ export class LoginComponent implements OnInit {
         })
   }
 
+
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/list-subreddits', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
+ }
+
+
+
+ ngOn
 }

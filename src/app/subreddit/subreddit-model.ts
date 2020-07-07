@@ -3,7 +3,7 @@ export class SubredditModel
     id?:number;
     name:string;
     numberOfPosts?:number;
-    username:string;
+    username?:string;
     description:string;
     createdDateTime?:string;
 }

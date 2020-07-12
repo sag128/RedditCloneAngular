@@ -17,9 +17,9 @@ export class PostService {
   }
 
 
-  createPost(postRequest:CreatePost):Observable<PostModel>
+  createPost(postRequest:CreatePost):Observable<any>
   {
-    return this.http.post<PostModel>('https://redditcloneapi.herokuapp.com/api/posts',postRequest);
+    return this.http.post('https://redditcloneapi.herokuapp.com/api/posts',postRequest,{responseType:'text'});
   }
 
   getPostById(id:number):Observable<PostModel>

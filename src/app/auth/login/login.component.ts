@@ -5,6 +5,9 @@ import { AuthService } from '../shared/auth.service';
 import { throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SocialAuthService, SocialUser } from "angularx-social-login";
+import {  GoogleLoginProvider } from "angularx-social-login";
+
 
 
 @Component({
@@ -18,14 +21,19 @@ export class LoginComponent implements OnInit {
   isError:Boolean;
   loginRequest:LoginRequest;
   registerSuccessMessage: string;
+  userSocial: SocialUser;
 
-  constructor(private authService:AuthService, private toastr: ToastrService, private activatedRoute:ActivatedRoute, private router:Router) {
+
+  constructor(private socialAuthService: SocialAuthService,private authService:AuthService, private toastr: ToastrService, private activatedRoute:ActivatedRoute, private router:Router) {
 
     this.loginRequest =
     {
       username :'',
       password:''
     };
+
+console.log(this.userSocial);
+
 
    }
 
@@ -39,6 +47,12 @@ export class LoginComponent implements OnInit {
       }
     );
 
+    this.socialAuthService.authState.subscribe((user) => {
+      this.userSocial = user;
+      console.log(user);
+    });
+
+
 
     this.activatedRoute.queryParams
     .subscribe(params => {
@@ -49,6 +63,13 @@ export class LoginComponent implements OnInit {
       }
       console.log(params)
     });
+
+  }
+
+
+  signIn2()
+  {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
 
@@ -83,5 +104,5 @@ export class LoginComponent implements OnInit {
 
 
 
- ngOn
+ 
 }

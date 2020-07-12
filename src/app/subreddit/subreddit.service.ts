@@ -17,13 +17,13 @@ export class SubredditService {
 
   getAllSubreddits():Observable<SubredditModel[]>
   {
-   return this.http.get<SubredditModel[]>('http://localhost:8080/api/subreddit');
+   return this.http.get<SubredditModel[]>('https://redditcloneapi.herokuapp.com/api/subreddit');
   }
 
 
   postCreateSubreddit(subredditModel:SubredditModel):Observable<SubredditModel>
   {
-    return this.http.post<SubredditModel>("http://localhost:8080/api/subreddit",subredditModel);
+    return this.http.post<SubredditModel>("https://redditcloneapi.herokuapp.com/api/subreddit",subredditModel);
   }
 
 

@@ -11,26 +11,26 @@ export class CommentRequestService {
 
   postAComment(commentRequest:CommentRequest):Observable<any>
   {
-    return this.http.post<any>('http://localhost:8080/api/comments',commentRequest);
+    return this.http.post<any>('https://redditcloneapi.herokuapp.com/api/comments',commentRequest);
   }
 
 
   getCommentsByPostid(postId: number):Observable<CommentRequest[]> {
 
-    return this.http.get<CommentRequest[]>('http://localhost:8080/api/comments/getByPost/'+postId);
+    return this.http.get<CommentRequest[]>('https://redditcloneapi.herokuapp.com/api/comments/getByPost/'+postId);
 
   }
 
 
   getCommentsByCurrentUser():Observable<CommentRequest[]> {
 
-    return this.http.get<CommentRequest[]>('http://localhost:8080/api/comments/getByCurrentUser/');
+    return this.http.get<CommentRequest[]>('https://redditcloneapi.herokuapp.com/api/comments/getByCurrentUser/');
 
   }
 
   getCommentsByUser(username:string):Observable<CommentRequest[]> {
 
-    return this.http.get<CommentRequest[]>('http://localhost:8080/api/comments/getByUsername/'+username);
+    return this.http.get<CommentRequest[]>('https://redditcloneapi.herokuapp.com/api/comments/getByUsername/'+username);
 
   }
 

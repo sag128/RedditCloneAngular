@@ -14,12 +14,12 @@ export class VoteService {
 
   postVote(vote:VoteRequest):Observable<any>
   {
-    return this.http.post('http://localhost:8080/api/votes',vote);
+    return this.http.post('https://redditcloneapi.herokuapp.com/api/votes',vote);
   }
 
   getVotesByUsername(username:string):Observable<any>
   {
-    return this.http.get('http://localhost:8080/api/votes/getVoteByUser/'+username);
+    return this.http.get('https://redditcloneapi.herokuapp.com/api/votes/getVoteByUser/'+username);
   }
 
 

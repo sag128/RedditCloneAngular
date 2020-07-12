@@ -27,7 +27,7 @@ export class AuthService {
   refreshToken() {   // get new jwt from the refreshtoken generated at the time of login with username
 
 
-    return this.http.post<LoginResponse>('http://localhost:8080/api/auth/refresh/token',
+    return this.http.post<LoginResponse>('https://redditcloneapi.herokuapp.com/api/auth/refresh/token',
       this.refreshTokenPayload)
       .pipe(tap(response => {
         this.localStorage.clear('authenticationToken');
@@ -51,12 +51,12 @@ export class AuthService {
 
   signupService(signupRequest:SignupRequest):Observable<any>
   {
-    return this.http.post('http://localhost:8080/api/auth/signup',signupRequest,{responseType:'text'});
+    return this.http.post('https://redditcloneapi.herokuapp.com/api/auth/signup/',signupRequest,{responseType:'text'});
   }
 
   loginService(loginRequest:LoginRequest) : Observable<boolean>
   {
-    return this.http.post<LoginResponse>('http://localhost:8080/api/auth/login',loginRequest).pipe(map(data =>
+    return this.http.post<LoginResponse>('https://redditcloneapi.herokuapp.com/api/auth/login/',loginRequest).pipe(map(data =>
     {
       this.localStorage.store('authenticationToken',data.authenticationToken);
       this.localStorage.store('expiresAt',data.expiresAt);
@@ -101,7 +101,7 @@ export class AuthService {
     }
     
    
-    this.http.post('http://localhost:8080/api/auth/logout',this.refreshTokenPayload,{responseType:'text'}).subscribe(
+    this.http.post('https://redditcloneapi.herokuapp.com/api/auth/logout',this.refreshTokenPayload,{responseType:'text'}).subscribe(
       data=>
       {
         console.log(data);

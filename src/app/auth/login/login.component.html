@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-header" style="text-align: center"><h4>Login</h4></div>
                 <div class="card-body">
-                    <form [formGroup]="loginForm" (ngSubmit)="login()">
+                    <form [formGroup]="loginForm" >
                         <div class="form-group row">
                             <label for="user_name" class="col-md-4 col-form-label text-md-right">Username</label>
                             <div class="col-md-6">
@@ -26,7 +26,7 @@
                         </div>
 
                         <span class="col-md-6 offset-md-4">
-                            <button type="submit" class="login">
+                            <button type="submit" class="login" (click) = "login()">
                                 Login
                             </button>
                             <span style="padding-left: 15px">New to SpringReddit? <a routerLink="/signup">Sign Up</a></span>
@@ -36,9 +36,12 @@
                         </div>   
                         <div class="login-failed" [ngStyle]="{'background-color': 'green'}" *ngIf="this.registerSuccessMessage.length > 0">
                             <p class="register-success-text">{{registerSuccessMessage}}</p>   
-                       </div>                         
+                       </div>  
+                                               
                     </form>
+                    
                 </div>
+
             </div>
         </div>
         <div class="col-md-3"></div>

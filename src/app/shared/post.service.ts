@@ -13,24 +13,24 @@ export class PostService {
 
   getAllPosts():Observable<PostModel[]>
   {
-    return this.http.get<PostModel[]>('http://localhost:8080/api/posts');
+    return this.http.get<PostModel[]>('https://redditcloneapi.herokuapp.com/api/posts');
   }
 
 
   createPost(postRequest:CreatePost):Observable<PostModel>
   {
-    return this.http.post<PostModel>('http://localhost:8080/api/posts',postRequest);
+    return this.http.post<PostModel>('https://redditcloneapi.herokuapp.com/api/posts',postRequest);
   }
 
   getPostById(id:number):Observable<PostModel>
   {
-    return this.http.get<PostModel>('http://localhost:8080/api/posts/'+id);
+    return this.http.get<PostModel>('https://redditcloneapi.herokuapp.com/api/posts/'+id);
   }
 
 
   getPostByUsername(username:string):Observable<PostModel[]>
   {
-    return this.http.get<PostModel[]>('http://localhost:8080/api/posts/byUser/'+username);
+    return this.http.get<PostModel[]>('https://redditcloneapi.herokuapp.com/api/posts/byUser/'+username);
   }
 
 }

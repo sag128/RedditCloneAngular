@@ -60,7 +60,7 @@ import {
     FontAwesomeModule,
     EditorModule,
     NgbModule,
-    SocialLoginModule
+    SocialLoginModule,
 
     
   ],

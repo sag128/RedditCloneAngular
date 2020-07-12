@@ -13,7 +13,7 @@ import {UserProfileGuardService} from './auth/user-profile/user-profile-guard.se
 const routes: Routes = [
   {path: 'signup',component:SignupComponent},
   {path:'login',component:LoginComponent},
-  {path:'',component:HomeComponent},
+  {path:'',component:HomeComponent,canActivate:[AuthGuardService]},
   {path:'create-post',component:CreatePostComponent, canActivate: [AuthGuardService] },
   {path:'create-subreddit',component:CreateSubredditComponent  , canActivate: [AuthGuardService]},
   {path:'list-subreddits',component:ListSubredditsComponent,canActivate: [AuthGuardService]},

@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   loginRequest:LoginRequest;
   registerSuccessMessage: string;
   userSocial: SocialUser;
+  success:Boolean;
 
 
   constructor(private http:HttpClient, private socialAuthService: SocialAuthService,private authService:AuthService, private toastr: ToastrService, private activatedRoute:ActivatedRoute, private router:Router) {
@@ -61,6 +62,8 @@ console.log(this.userSocial);
         this.toastr.success("Signup successful","Success",{progressBar:true});
         this.registerSuccessMessage = 'Please Check your inbox for activation email '
           + 'activate your account before you Login!';
+          this.success=true;
+
       }
       console.log(params)
     });
@@ -89,9 +92,9 @@ console.log(this.userSocial);
 
             this.isError=true;
           throwError(error)
-          console.log("Error")
-          this.toastr.error("Login failed","Error",{progressBar:true})
-          
+          console.log(error.error.text)
+          this.toastr.error("Login failed",error.error.text,{progressBar:true})
+
           })
       })
 }
@@ -127,10 +130,8 @@ console.log(this.userSocial);
       ,
       error => 
         {
-          this.isError=true;
-          throwError(error)
-          console.log("Error")
-          this.toastr.error("Login failed","Error",{progressBar:true})
+          console.log(error.error.text)
+          this.toastr.error("Login failed",error.error.text,{progressBar:true})
         })
   }
 

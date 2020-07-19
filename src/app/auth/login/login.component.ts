@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SocialAuthService, SocialUser } from "angularx-social-login";
 import {  GoogleLoginProvider } from "angularx-social-login";
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
   userSocial: SocialUser;
 
 
-  constructor(private socialAuthService: SocialAuthService,private authService:AuthService, private toastr: ToastrService, private activatedRoute:ActivatedRoute, private router:Router) {
+  constructor(private http:HttpClient, private socialAuthService: SocialAuthService,private authService:AuthService, private toastr: ToastrService, private activatedRoute:ActivatedRoute, private router:Router) {
 
     this.loginRequest =
     {
@@ -64,13 +65,50 @@ console.log(this.userSocial);
       console.log(params)
     });
 
+
+    
   }
 
 
   signIn2()
   {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
-  }
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data=>
+      {
+        this.userSocial=data;
+        const token = this.userSocial.idToken;
+        this.authService.googleLogin(token).subscribe(data=>
+          {
+
+            this.isError=false
+          this.toastr.success("Login successful","Success",{progressBar:true});
+          this.redirectTo('');
+          },
+          error=>
+          {
+
+
+            this.isError=true;
+          throwError(error)
+          console.log("Error")
+          this.toastr.error("Login failed","Error",{progressBar:true})
+          
+          })
+      })
+}
+
+  // call(tokenArgs:String)
+  // {
+  //   this.http.post("http://localhost:8080/api/auth/getGoogleJwt/",{"token":tokenArgs},{responseType:"text"}).subscribe(data=>
+  //   {
+  //     console.log(data)
+  //   },
+
+  //   error=>
+  //   {
+  //     console.log(error);
+      
+  //   })
+  // }
 
 
   login()

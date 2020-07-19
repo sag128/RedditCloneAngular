@@ -7,6 +7,7 @@ import {LoginResponse} from '../login/login-response.payload';
 import {  LocalStorageService } from 'ngx-webstorage';
 import { map, tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { Token } from '@angular/compiler/src/ml_parser/lexer';
 
 
 @Injectable({
@@ -57,6 +58,27 @@ export class AuthService {
   loginService(loginRequest:LoginRequest) : Observable<boolean>
   {
     return this.http.post<LoginResponse>('https://redditcloneapi.herokuapp.com/api/auth/login/',loginRequest).pipe(map(data =>
+    {
+      this.localStorage.store('authenticationToken',data.authenticationToken);
+      this.localStorage.store('expiresAt',data.expiresAt);
+      this.localStorage.store('refreshToken',data.refreshToken);
+      this.localStorage.store('username',data.username);
+
+
+      this.loggedIn.emit(true);
+      this.username.emit(data.username);
+      return true;
+    }
+    
+    ))
+    
+  
+  }
+
+
+  googleLogin(token:String) : Observable<boolean>
+  {
+    return this.http.post<LoginResponse>("https://redditcloneapi.herokuapp.com/api/auth/getGoogleJwt/",{"token":token}).pipe(map(data =>
     {
       this.localStorage.store('authenticationToken',data.authenticationToken);
       this.localStorage.store('expiresAt',data.expiresAt);

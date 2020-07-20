@@ -31,24 +31,31 @@
                             </button>
                             <span style="padding-left: 15px">New to SpringReddit? <a routerLink="/signup">Sign Up</a></span>
                         </span>   
+                        
                         <div class="login-failed" *ngIf='this.isError'>
                              <p class="login-failed-text">Login Failed. Please check your credentials and try again.</p>   
                         </div>   
                         <div class="login-failed" [ngStyle]="{'background-color': 'green'}" *ngIf="this.success">
                             <p class="register-success-text">{{registerSuccessMessage}}</p>   
                        </div>  
+                       
                                                
                     </form>
                     
                 </div>
+                
 
             </div>
+            
         </div>
         <div class="col-md-3"></div>
-        <div>
-
-            <button (click)= "signIn2()">Google</button>
-
+        <div class="col-md-2">
+            <a class="btn btn-outline-dark" (click)="signIn2()" role="button" style="text-transform:none">
+              <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+              Login with Google
+            </a>
+      
         </div>
+           
     </div>
 </div>

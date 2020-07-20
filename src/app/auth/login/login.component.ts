@@ -126,7 +126,8 @@ console.log(this.userSocial);
 
           this.isError=false
           this.toastr.success("Login successful","Success",{progressBar:true});
-          this.redirectTo('');        
+          this.redirectTo('');
+          this.localStorage.store("image","https://www.redditstatic.com/avatars/avatar_default_08_D4E815.png")        
 
       }
       ,

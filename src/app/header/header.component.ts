@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { AuthService } from '../auth/shared/auth.service';
 import { Router } from '@angular/router';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,11 @@ export class HeaderComponent implements OnInit {
   isLoggedIn:Boolean;
   username:string; 
   faUser = faUser;
-  constructor(private authService:AuthService,private router:Router) { }
+  image:String;
+
+
+  constructor(private localstorage:LocalStorageService, private authService:AuthService,private router:Router) { }
+  
   
 
 
@@ -25,6 +30,7 @@ export class HeaderComponent implements OnInit {
  this.isLoggedIn= this.authService.isLoggedIn();
  this.username = this.authService.getUserName();
  
+ this.image = this.localstorage.retrieve("image");
 
 
 

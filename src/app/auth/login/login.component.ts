@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SocialAuthService, SocialUser } from "angularx-social-login";
 import {  GoogleLoginProvider } from "angularx-social-login";
 import { HttpClient } from '@angular/common/http';
+import { LocalStorageService } from 'ngx-webstorage';
 
 
 
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
   success:Boolean;
 
 
-  constructor(private http:HttpClient, private socialAuthService: SocialAuthService,private authService:AuthService, private toastr: ToastrService, private activatedRoute:ActivatedRoute, private router:Router) {
+  constructor(private localStorage:LocalStorageService,private http:HttpClient, private socialAuthService: SocialAuthService,private authService:AuthService, private toastr: ToastrService, private activatedRoute:ActivatedRoute, private router:Router) {
 
     this.loginRequest =
     {
@@ -82,6 +83,7 @@ console.log(this.userSocial);
         this.authService.googleLogin(token).subscribe(data=>
           {
 
+            this.localStorage.store("image",this.userSocial.photoUrl);
             this.isError=false
           this.toastr.success("Login successful","Success",{progressBar:true});
           this.redirectTo('');

@@ -98,7 +98,7 @@ export class AuthService {
 
   amazonLogin(token:String) : Observable<boolean>
   {
-    return this.http.post<LoginResponse>("http://localhost:8080/api/auth/amazon/",{"token":token}).pipe(map(data =>
+    return this.http.post<LoginResponse>("https://redditcloneapi.herokuapp.com/api/auth/amazon/",{"token":token}).pipe(map(data =>
     {
       this.localStorage.store('authenticationToken',data.authenticationToken);
       this.localStorage.store('expiresAt',data.expiresAt);

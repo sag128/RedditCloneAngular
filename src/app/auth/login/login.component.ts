@@ -5,7 +5,7 @@ import { AuthService } from '../shared/auth.service';
 import { throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SocialAuthService, SocialUser } from "angularx-social-login";
+import { SocialAuthService, SocialUser, AmazonLoginProvider } from "angularx-social-login";
 import {  GoogleLoginProvider } from "angularx-social-login";
 import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -100,6 +100,38 @@ console.log(this.userSocial);
           })
       })
 }
+
+
+
+amazon()
+  {
+    this.socialAuthService.signIn(AmazonLoginProvider.PROVIDER_ID).then(data=>
+      {
+        this.userSocial=data;
+        const token = this.userSocial.authToken;
+        this.authService.amazonLogin(token).subscribe(data=>
+          {
+
+            this.localStorage.store("image","https://www.redditstatic.com/avatars/avatar_default_08_D4E815.png");
+            this.isError=false
+          this.toastr.success("Login successful","Success",{progressBar:true});
+          this.redirectTo('');
+          },
+          error=>
+          {
+
+
+            this.isError=true;
+          throwError(error)
+          console.log(error.error.text)
+          this.toastr.error("Login failed",error.error.text,{progressBar:true})
+
+          })
+      })
+}
+
+
+
 
   // call(tokenArgs:String)
   // {

@@ -88,7 +88,7 @@ import {
           {
             id: AmazonLoginProvider.PROVIDER_ID,
             provider: new AmazonLoginProvider(
-              'clientId'
+              'amzn1.application-oa2-client.9e4e59a9ae4645c4b57d8e448a003e3a'
             ),
           },
         ],

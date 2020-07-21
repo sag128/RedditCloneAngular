@@ -96,6 +96,26 @@ export class AuthService {
   
   }
 
+  amazonLogin(token:String) : Observable<boolean>
+  {
+    return this.http.post<LoginResponse>("http://localhost:8080/api/auth/amazon/",{"token":token}).pipe(map(data =>
+    {
+      this.localStorage.store('authenticationToken',data.authenticationToken);
+      this.localStorage.store('expiresAt',data.expiresAt);
+      this.localStorage.store('refreshToken',data.refreshToken);
+      this.localStorage.store('username',data.username);
+
+
+      this.loggedIn.emit(true);
+      this.username.emit(data.username);
+      return true;
+    }
+    
+    ))
+    
+  
+  }
+
 
 
   getUserName() {
